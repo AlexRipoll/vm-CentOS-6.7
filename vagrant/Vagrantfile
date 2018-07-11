@@ -1,0 +1,47 @@
+VAGRANT_API_VERSION = 2
+
+Vagrant.require_version ">= 2"
+
+required_plugins = %w( vagrant-vbguest )
+required_plugins.each do |plugin|
+  system "vagrant plugin install #{plugin}" unless Vagrant.has_plugin? plugin
+end
+
+required_plugins = %w( vagrant-hostmanager )
+required_plugins.each do |plugin|
+  system "vagrant plugin install #{plugin}" unless Vagrant.has_plugin? plugin
+end
+
+
+Vagrant.configure(VAGRANT_API_VERSION) do |config|
+  
+  config.vm.box = "nrel/CentOS-6.7-x86_64"
+  config.vm.box_version = "1.0.0"
+
+  config.ssh.forward_agent = true
+  config.ssh.shell = "bash -l" 
+  
+  
+  config.vm.synced_folder "../ansible", "/ansible",
+  id: "ansible-provision", 
+  :nfs => true
+
+  config.vm.synced_folder "../shared/web", "/var/www/myproject",
+  id: "vagrant-websites", 
+  :nfs => true, 
+  :mount_options => ['rw', 'vers=3', 'tcp', 'fsc', 'actimeo=2']
+
+  
+  config.vm.provision :shell, path: "shell/vagrant_main_provision.sh"
+
+
+  config.vm.define 'apache' do |node|
+    
+    node.vm.network :forwarded_port, guest: 80, host: 8080
+    node.vm.network :private_network, ip: "192.168.33.99"
+    node.vm.hostname = "myMpwar"
+    node.hostmanager.aliases = %w("myMpwar.dev" "myMpwar.prod")
+  end
+  
+  
+end
