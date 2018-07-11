@@ -20,7 +20,7 @@
     - role: geerlingguy.php-mysql
     - role: geerlingguy.git
 
-    
+    - role: DavidWittman.redis    
 
   tasks:
 
