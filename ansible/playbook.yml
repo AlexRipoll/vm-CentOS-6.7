@@ -1,0 +1,38 @@
+---
+- name: Server Config LAMP
+  hosts: "webservers"
+  become: true
+  become_user: root
+  roles:
+    - role: geerlingguy.ntp
+      ntp_timezone: Europe/Madrid
+
+    - role: geerlingguy.repo-remi
+    - role: geerlingguy.repo-epel
+
+    - role: geerlingguy.firewall
+    - role: geerlingguy.apache
+    - role: geerlingguy.php-versions
+    - role: geerlingguy.php
+    - role: geerlingguy.apache-php-fpm
+    - role: geerlingguy.composer
+    - role: geerlingguy.mysql
+    - role: geerlingguy.php-mysql
+    - role: geerlingguy.git
+
+    
+
+  tasks:
+
+    - name: Create directory
+      file: path=/var/www/myproject state=directory
+
+
+    - name: Create index.php
+      template: src=templates/index.php dest=/var/www/myproject/index.php
+
+    - name: Create phpinfo();
+      template: src=templates/info.php dest=/var/www/myproject/info.php
+
+
+    

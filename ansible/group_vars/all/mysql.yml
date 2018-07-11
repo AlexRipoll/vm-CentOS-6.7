@@ -1,0 +1,22 @@
+mysql_enablerepo: "remi,epel"
+mysql_user_home: /home/vagrant/
+mysql_user_name: vagrant
+mysql_user_password: vagrant
+
+mysql_root_home: /root
+mysql_root_username: root
+mysql_root_password: root
+
+mysql_root_password_update: no
+
+mysql_enabled_on_startup: yes
+overwrite_global_mycnf: yes
+
+mysql_databases: 
+  - name: mympwar
+    encoding: utf8
+    collation: utf8_general_ci
+
+  - name: mympwar_test
+    encoding: utf8
+    collation: utf8_general_ci

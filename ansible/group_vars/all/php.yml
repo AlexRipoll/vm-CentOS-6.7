@@ -1,0 +1,32 @@
+php_enablerepo: "remi-php72"
+php_version: "7.2"
+
+php_executable: "php"
+
+php_packages_state: present
+
+php_install_recommends: yes
+
+php_packages_extra:
+  - php-bcmath
+  - php-pecl-zip
+
+php_use_managed_ini: true
+
+php_date_timezone: "Europe/Madrid"
+
+php_error_reporting: "E_ALL & ~E_DEPRECATED & ~E_STRICT"
+php_display_errors: "On"
+php_display_startup_errors: "On"
+
+php_memory_limit: "1024M"
+php_max_execution_time: "180"
+php_max_input_time: "180"
+php_max_input_vars: "2000"
+php_realpath_cache_size: "64K"
+php_file_uploads: "On"
+php_upload_max_filesize: "64M"
+php_max_file_uploads: "100MB"
+php_post_max_size: "256M"
+php_allow_url_fopen: "On"
+php_output_buffering: "4096"

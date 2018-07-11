@@ -1,0 +1,9 @@
+firewall_allowed_tcp_ports:
+  - "21"    #ftp
+  - "22"    #ssh
+  - "80"    #http
+  - "115"   #sftp
+  - "443"   #SSL - HTTPS
+  - "3306"  #MySQL
+  - "8080"  #Alternativo HTTP
+firewall_allowed_udp_ports: []

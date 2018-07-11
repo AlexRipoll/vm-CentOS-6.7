@@ -1,0 +1,10 @@
+[webservers]
+myMpwar
+
+[apacheserver]
+myMpwara1
+myMpwara2
+
+[mysqlserver]
+myMpwarm1
+myMpwarm2
